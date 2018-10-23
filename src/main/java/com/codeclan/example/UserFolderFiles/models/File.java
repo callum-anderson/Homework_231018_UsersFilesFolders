@@ -1,13 +1,21 @@
 package com.codeclan.example.UserFolderFiles.models;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "files")
 public class File {
+    @Column(name = "name")
     private String name;
+    @Column(name = "extension")
     private String extension;
+    @Column(name = "size")
     private int size;
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name="folder_id", nullable=false)
     private Folder folder;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

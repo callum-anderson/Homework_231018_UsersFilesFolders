@@ -1,13 +1,18 @@
 package com.codeclan.example.UserFolderFiles.models;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@Table(name = "users")
 public class User {
+    @Column(name = "name")
     private String name;
+    @JsonIgnore
+    @OneToMany(mappedBy="user", fetch = FetchType.LAZY)
     private List<Folder> folders;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
